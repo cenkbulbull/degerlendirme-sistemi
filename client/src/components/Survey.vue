@@ -3,8 +3,21 @@
 		<button><i class="fa-solid fa-xmark"></i></button>
 		<p>Would you like to receive updates when we post new upcoming webinars?</p>
 		<div class="input-group">
-			<input type="radio" name="radio"> <label for="radio">Yes, please</label>
-			<input type="radio" name="radio"> <label for="radio">Nope</label>
+			<div class="radio-group">
+				<input type="radio" name="radio" value="1"><label for="radio">1</label>
+			</div>
+			<div class="radio-group">
+				<input type="radio" name="radio" value="2"><label for="radio">2</label>
+			</div>
+			<div class="radio-group">
+				<input type="radio" name="radio" value="3"><label for="radio">3</label>
+			</div>
+			<div class="radio-group">
+				<input type="radio" name="radio" value="4"><label for="radio">4</label>
+			</div>
+			<div class="radio-group">
+				<input type="radio" name="radio" value="5"><label for="radio">5</label>
+			</div>
 		</div>
 		<button>Next <i class="fa-solid fa-chevron-right"></i></button>
 	</div>
@@ -12,7 +25,7 @@
 <script>
 	
 </script>
-<style scoped>
+<style>
 	/*
 font-family: 'Work Sans', sans-serif;
 font-family: 'Poppins', sans-serif;
@@ -37,22 +50,29 @@ font-family: 'Poppins', sans-serif;
 		justify-content:start;
 		background-color:#2D354D ;
 		color: #ffffff;
-		width: 300px;
-		height: 200px;
-		margin: 160px auto;
+		width: 400px;
+		height: 300px;
+		margin: 130px auto;
 		padding: 50px;
 		font-size: 14px;
 	}
 	.popup .input-group{
-		margin-top: 50px;
+		margin-top: 20px;
+	}
+	.popup .radio-group{
+		margin-right: 4px;
+	}
+	.popup .radio-group label{
+		font-size: 12px;
+		margin-left: 3px;
 	}
 	.popup .input-group input[type='radio'] { 
 		transform: scale(2); 
-		margin: 0 10px;
+		margin: 3px 10px;
 	}
 	input[type='radio']:checked:after {
-		width: 13px;
-		height: 13px;
+		width: 15px;
+		height: 15px;
 		border-radius: 50%;
 		background-color: #F39354;
 		content: '';
