@@ -47,14 +47,14 @@ export default createStore({
           id:11,
           question:"İletişim bilgieri ve ulaşılabilirliği puanlayın"
         }
-        sitetop4:[
+      ],
+      sitetop4:[
           {
             sitename:null,
             totalpoint:null
           }
 
-        ]
-      ],
+      ]
 
   },
   getters: {
