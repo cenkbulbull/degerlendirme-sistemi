@@ -7,18 +7,19 @@
 		<h4 class="mb-5 text-center display-6">En Yüksek Değerlendirme Alanlar</h4>
 		<HighestVote/>
 	</div>
-	<!--<Survey/>-->
 </template>
 
 <script>
-	import Survey from "../components/Survey.vue"
 	import Input from "../components/Input.vue"
 	import HighestVote from "../components/HighestVote.vue"
+	import {ref} from "vue"
 	export default{
 		components:{
 			Input,
 			HighestVote,
-			Survey
+		},
+		setup(){
+
 		}
 	}
 </script>

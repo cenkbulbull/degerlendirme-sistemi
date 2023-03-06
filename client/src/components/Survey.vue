@@ -1,29 +1,46 @@
 <template>
 	<div class="popup">
-		<button><i class="fa-solid fa-xmark"></i></button>
-		<p>Would you like to receive updates when we post new upcoming webinars?</p>
-		<div class="input-group">
-			<div class="radio-group">
-				<input type="radio" name="radio" value="1"><label for="radio">1</label>
+		<button @click="this.$router.push('/')"><i class="fa-solid fa-xmark"></i></button>
+		<p>{{questions.length>$route.params.id ? questions[$route.params.id].question : "Değerlendirme bitmiştir, kapatabilirsiniz"}}</p>
+		<p v-if="!(questions.length>$route.params.id)">Toplam verdiğiniz puan : {{totalPoint}}</p>
+		<div v-if="questions.length>$route.params.id" class="input-group">
+
+			<div v-for="(i,index) in 5" class="radio-group">
+				<input v-model="currentPoint" type="radio" name="radio" :value="index+1"><label for="radio">{{index+1}}</label>
 			</div>
-			<div class="radio-group">
-				<input type="radio" name="radio" value="2"><label for="radio">2</label>
-			</div>
-			<div class="radio-group">
-				<input type="radio" name="radio" value="3"><label for="radio">3</label>
-			</div>
-			<div class="radio-group">
-				<input type="radio" name="radio" value="4"><label for="radio">4</label>
-			</div>
-			<div class="radio-group">
-				<input type="radio" name="radio" value="5"><label for="radio">5</label>
-			</div>
+			{{currentPoint}} -- {{totalPoint}}
 		</div>
-		<button>Next <i class="fa-solid fa-chevron-right"></i></button>
+		<button @click="next" :disabled="!(questions.length>$route.params.id)">Next <i class="fa-solid fa-chevron-right"></i></button>
 	</div>
 </template>
 <script>
-	
+	import {ref,computed} from 'vue'
+	import {useRoute,useRouter} from "vue-router"
+	import {useStore} from 'vuex'
+	export default{
+		setup(){
+			const currentPoint = ref(null)
+			const totalPoint = ref(null)
+			const store = useStore()
+			const route = useRoute()
+			const router = useRouter()
+
+			const questions = computed(()=>{
+				return store.getters.getStateQuestions
+			})
+
+			const next = ()=>{
+				totalPoint.value += currentPoint.value
+				const newid = parseInt(route.params.id)+1
+				if (questions.value.length>parseInt(route.params.id)) {
+					router.push("/rating/"+route.params.sitename+"/"+newid)
+				}
+			}
+
+
+			return {questions,currentPoint,totalPoint,next}
+		}
+	}
 </script>
 <style>
 	/*
@@ -122,5 +139,4 @@ font-family: 'Poppins', sans-serif;
 			padding: 40px;
 		}
 	}
-
 </style>
