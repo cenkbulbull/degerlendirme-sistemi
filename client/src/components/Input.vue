@@ -3,6 +3,7 @@
 		<div class="input-group flex-nowrap">
 			<span class="input-group-text">www.</span>
 			<input v-model="site" type="text" class="form-control" placeholder="example.com">
+			<a style="border-right: 3px solid #fff;" :href="site!=null ? `http://www.`+site : '#'" target="_blank" class="buton">Siteyi İncele</a>
 			<button @click="rating" class="buton">Değerlendir</button>
 		</div>
 	</div>
@@ -44,5 +45,9 @@
 		border: 0;
 		border-radius: 7px;
 		padding: 14px;
+		text-decoration: none;
+	}
+	.buton:hover{
+		color: #fff;
 	}
 </style>
