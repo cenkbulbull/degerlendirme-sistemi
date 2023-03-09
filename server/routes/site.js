@@ -31,14 +31,26 @@ router.get("/top4",(req,res,next)=>{
 	})
 })
 
+//aranan site varmı yokmu (true/false) sorgusu
+router.get("/:sitename",(req,res)=>{
+	const promise = Site.find({name:req.params.sitename})
+	promise.then((data)=>{
+		if (!data.length>0) {
+			//console.log("veri yok")
+			res.send(false)
+		}else{
+			console.log(data)
+			res.send(true)
+		}		
+	}).catch((err)=>{
+		res.json(err)
+	})
+})
+
 //site ilk değerlendirme
 router.post("/",(req,res,next)=>{
-	const {name,totalpoint} = req.body
 
-	const site = new Site({
-		name,
-		totalpoint
-	})
+	const site = new Site(req.body)
 
 	/*site.save((err,data)=>{
 		if (err) {

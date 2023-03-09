@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import axios from "axios"
 
 export default createStore({
   state: {
@@ -48,24 +49,35 @@ export default createStore({
           question:"İletişim bilgieri ve ulaşılabilirliği puanlayın"
         }
       ],
-      sitetop4:[
-          {
-            sitename:null,
-            totalpoint:null
-          }
-
-      ]
+      sitetop4:[]
 
   },
   getters: {
     getStateQuestions(state){
       return state.Questions
+    },
+    getStateSitetop4(state){
+      return state.sitetop4
     }
   },
   mutations: {
+    setStateTop4(state,payload){
+      state.sitetop4.push(payload)
+    }
   },
   actions: {
+    setMutationTop4(context){
+      /*context.commit("setStateTop4",data)*/
+
+      axios.get("http://localhost:3000/api/site/top4")
+      .then((site)=>{
+        //console.log(site.data)
+        context.commit("setStateTop4",site.data)
+
+      }).catch((err)=>{
+        console.log(err)
+      })
+
+    }
   },
-  modules: {
-  }
 })

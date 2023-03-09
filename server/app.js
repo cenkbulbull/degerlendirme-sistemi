@@ -1,12 +1,14 @@
 const express = require('express')
 const bodyParser = require('body-parser');
+const cors = require('cors')
+
 
 const site = require('./routes/site');
 
 
 
 const app = express()
-
+app.use(cors())
 
 // db connection
 const db = require('./helper/db.js')();

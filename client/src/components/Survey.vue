@@ -1,6 +1,6 @@
 <template>
 	<div class="popup">
-		<button @click="this.$router.push('/')"><i class="fa-solid fa-xmark"></i></button>
+		<button @click="close"><i class="fa-solid fa-xmark"></i></button>
 		<p>{{questions.length>$route.params.id ? questions[$route.params.id].question : "Değerlendirme bitmiştir, kapatabilirsiniz"}}</p>
 		<p v-if="!(questions.length>$route.params.id)">Toplam verdiğiniz puan : {{totalPoint}}</p>
 		<div v-if="questions.length>$route.params.id" class="input-group">
@@ -8,7 +8,7 @@
 			<div v-for="(i,index) in 5" class="radio-group">
 				<input v-model="currentPoint" type="radio" name="radio" :value="index+1"><label for="radio">{{index+1}}</label>
 			</div>
-			{{currentPoint}} -- {{totalPoint}}
+			<!--{{currentPoint}} -- {{totalPoint}}-->
 		</div>
 		<button @click="next" :disabled="!(questions.length>$route.params.id)">Next <i class="fa-solid fa-chevron-right"></i></button>
 	</div>
@@ -17,6 +17,7 @@
 	import {ref,computed} from 'vue'
 	import {useRoute,useRouter} from "vue-router"
 	import {useStore} from 'vuex'
+	import axios from "axios"
 	export default{
 		setup(){
 			const currentPoint = ref(null)
@@ -37,8 +38,67 @@
 				}
 			}
 
+			const close = async()=>{
+				if (questions.value.length>parseInt(route.params.id)) {
+					router.push("/")
+				}
+				else{
 
-			return {questions,currentPoint,totalPoint,next}
+
+
+					const data = {
+						name:route.params.sitename,
+						totalpoint:totalPoint.value
+					}
+
+					await axios.get("http://localhost:3000/api/site/"+route.params.sitename)
+					.then((durum)=>{
+						//console.log(durum.data)
+						if (durum.data == true) {
+
+							axios.put("http://localhost:3000/api/site/"+route.params.sitename,data)
+							.then((data)=>{
+								console.log(data)
+								router.push("/")
+							}).catch((err)=>{
+								console.log(err)
+							})
+
+						}else{
+
+							axios.post("http://localhost:3000/api/site",data)
+							.then((data)=>{
+								console.log(data)
+								//console.log("veri eklendi")
+								router.push("/")
+							}).catch((err)=>{
+								console.log(err)
+							})
+
+						}
+					}).catch((err)=>{
+						console.log(err)
+					})
+					
+					/*await axios.post("http://localhost:3000/api/site",data)
+					.then((data)=>{
+						console.log(data)
+						//console.log("veri eklendi")
+
+						router.push("/")
+					}).catch((err)=>{
+						console.log(err)
+					})*/
+
+
+
+
+
+				}
+			}
+
+
+			return {questions,currentPoint,totalPoint,next,close}
 		}
 	}
 </script>
