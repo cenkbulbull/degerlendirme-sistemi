@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const dotenv = require('dotenv')
 
 
 const site = require('./routes/site');
@@ -9,6 +10,7 @@ const site = require('./routes/site');
 
 const app = express()
 app.use(cors())
+dotenv.config()
 
 // db connection
 const db = require('./helper/db.js')();
