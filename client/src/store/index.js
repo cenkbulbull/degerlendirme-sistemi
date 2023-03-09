@@ -49,7 +49,8 @@ export default createStore({
           question:"İletişim bilgieri ve ulaşılabilirliği puanlayın"
         }
       ],
-      sitetop4:[]
+      sitetop4:[],
+      registeredsites:[]
 
   },
   getters: {
@@ -58,13 +59,21 @@ export default createStore({
     },
     getStateSitetop4(state){
       return state.sitetop4
+    },
+    getStateRegistered(state){
+      return state.registeredsites
     }
   },
   mutations: {
     setStateTop4(state,payload){
       state.sitetop4.push(payload)
+    },
+    setStateRegistered(state,payload){
+      state.registeredsites.push(payload)
     }
   },
+
+
   actions: {
     setMutationTop4(context){
       /*context.commit("setStateTop4",data)*/
@@ -78,6 +87,17 @@ export default createStore({
         console.log(err)
       })
 
+    },
+    setMutationRegistered(context){
+      axios.get("http://localhost:3000/api/site")
+      .then((site)=>{
+        //console.log(site.data)
+        context.commit("setStateRegistered",site.data)
+      }).catch((err)=>{
+        console.log(err)
+      })
     }
+
+
   },
 })

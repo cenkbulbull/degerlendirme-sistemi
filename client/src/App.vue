@@ -22,6 +22,7 @@
 
     onMounted(()=>{
       store.dispatch("setMutationTop4")
+      store.dispatch("setMutationRegistered")
     })
   }
 }
