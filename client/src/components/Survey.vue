@@ -57,24 +57,34 @@
 						//console.log(durum.data)
 						if (durum.data == true) {
 
-							axios.put("http://localhost:3000/api/site/"+route.params.sitename,data)
-							.then((data)=>{
-								console.log(data)
+							if (totalPoint.value<=55) {  //routerda geri ileri yapılıp, puan yükseltme işlemi için kısa süreli kontrol
+								axios.put("http://localhost:3000/api/site/"+route.params.sitename,data)
+								.then((data)=>{
+									console.log(data)
+									router.push("/")
+								}).catch((err)=>{
+									console.log(err)
+								})
+							}else{
+								console.log("Kayıt yapılmadı")
 								router.push("/")
-							}).catch((err)=>{
-								console.log(err)
-							})
+							}
 
 						}else{
 
-							axios.post("http://localhost:3000/api/site",data)
-							.then((data)=>{
-								console.log(data)
-								//console.log("veri eklendi")
+							if (totalPoint.value<=55) {  //routerda geri ileri yapılıp, puan yükseltme işlemi için kısa süreli kontrol
+								axios.post("http://localhost:3000/api/site",data)
+								.then((data)=>{
+									console.log(data)
+									//console.log("veri eklendi")
+									router.push("/")
+								}).catch((err)=>{
+									console.log(err)
+								})
+							}else{
+								console.log("Kayıt yapılmadı")
 								router.push("/")
-							}).catch((err)=>{
-								console.log(err)
-							})
+							}
 
 						}
 					}).catch((err)=>{
