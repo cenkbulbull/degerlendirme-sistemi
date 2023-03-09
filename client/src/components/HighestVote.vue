@@ -18,6 +18,10 @@
 					<div class="divdaire">
 						<p class="mt-3">{{t.totalpoint}} p</p>
 					</div>
+					<div class="evaluation alert alert-warning text-center">
+						<p>{{t.evaluation}} kez değerlendirildi</p>
+						<p>Ortalama puan: {{Math.floor(t.totalpoint/t.evaluation)}}</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -43,7 +47,7 @@
 	.card {
 		width: 190px;
 		height: 254px;
-		margin: 0 auto;
+		margin: 0 auto 20px auto;
 		background-color: #F8FBFE;
 		border-radius: 8px;
 		z-index: 1;
@@ -63,11 +67,14 @@
 		width: 90px;
 		height: 90px;
 		padding: 10px;
-		margin: 20px auto 40px auto;
+		margin: 10px auto 10px auto;
 		border-radius: 50%;
 		background-color: #F39354;
 		color: #fff;
 		font-weight: bold;
+	}
+	.card__content .evaluation{
+		font-size: 13px;
 	}
 	.card__content p a{
 		text-decoration: none;

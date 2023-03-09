@@ -70,9 +70,9 @@ router.post("/",(req,res,next)=>{
 
 //site ikinci ve daha sonraki değerlendirmeler (güncelleme)
 router.put("/:sitename",(req,res,next)=>{
-	const {name,totalpoint:newpoint} = req.body
+	const {name,totalpoint:newpoint,evaluation} = req.body
 
-	const promise = Site.findOneAndUpdate({name:req.params.sitename},{name:name, $inc:{totalpoint: newpoint} }) //$inc ile artırma işlemi yapıldı
+	const promise = Site.findOneAndUpdate({name:req.params.sitename},{name:name, $inc:{totalpoint: newpoint,evaluation:evaluation} }) //$inc ile artırma işlemi yapıldı
 
 	promise.then((data)=>{
 		res.json(data)

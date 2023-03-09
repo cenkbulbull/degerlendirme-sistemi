@@ -48,7 +48,8 @@
 
 					const data = {
 						name:route.params.sitename,
-						totalpoint:totalPoint.value
+						totalpoint:totalPoint.value,
+						evaluation:1
 					}
 
 					await axios.get("http://localhost:3000/api/site/"+route.params.sitename)

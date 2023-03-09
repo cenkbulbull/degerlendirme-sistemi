@@ -9,6 +9,10 @@ const SiteSchema = new Schema({
 	totalpoint:{
 		type:Number,
 		required:true
+	},
+	evaluation:{
+		type:Number,
+		required:true
 	}
 })
 
